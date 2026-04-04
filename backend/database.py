@@ -3,10 +3,21 @@ Database Setup and Connection Management
 Handles Supabase pgvector initialization
 """
 
-import asyncpg
-from supabase import create_client, Client
 import logging
+from typing import Optional
+
 from backend.config import settings
+
+try:
+    import asyncpg
+except ImportError:
+    asyncpg = None  # type: ignore[assignment]
+
+try:
+    from supabase import create_client, Client
+except ImportError:
+    create_client = None  # type: ignore[assignment]
+    Client = None  # type: ignore[assignment,misc]
 
 logger = logging.getLogger(__name__)
 

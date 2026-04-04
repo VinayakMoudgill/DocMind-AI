@@ -4,7 +4,7 @@ import React, { useRef } from 'react'
 import { Upload, Info } from 'lucide-react'
 
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') || 'http://127.0.0.1:8010/api'
+  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') || 'http://127.0.0.1:8000/api'
 
 interface DocumentUploaderProps {
   onUpload: (documents: any[]) => void
@@ -42,22 +42,22 @@ export function DocumentUploader({ onUpload }: DocumentUploaderProps) {
       const fromApi = data.documents as { id: string; name: string; chunks: number }[] | undefined
       const newDocs = fromApi?.length
         ? fromApi.map((d) => ({
-            id: d.id,
-            name: d.name,
-            chunks: d.chunks,
-            type: '',
-          }))
+          id: d.id,
+          name: d.name,
+          chunks: d.chunks,
+          type: '',
+        }))
         : (data.document_ids as string[]).map((id: string, i: number) => {
-            const file = files[i]
-            return {
-              id,
-              name: file?.name || id,
-              chunks: Math.floor(
-                (data.chunks_ingested || 0) / Math.max(data.document_ids.length, 1),
-              ),
-              type: file?.type,
-            }
-          })
+          const file = files[i]
+          return {
+            id,
+            name: file?.name || id,
+            chunks: Math.floor(
+              (data.chunks_ingested || 0) / Math.max(data.document_ids.length, 1),
+            ),
+            type: file?.type,
+          }
+        })
 
       onUpload(newDocs)
     } catch (e: any) {

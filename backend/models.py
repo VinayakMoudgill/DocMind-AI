@@ -87,7 +87,7 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     """Response from chat query"""
     answer: str
-    source_map: List[ChunkSource]
+    source_map: List[Dict[str, Any]]
     confidence_score: float  # NLI entailment score
     nli_scores: Dict[str, float]
     conversation_id: str

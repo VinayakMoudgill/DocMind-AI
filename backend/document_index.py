@@ -27,8 +27,8 @@ def _ensure_ml_path() -> None:
 
 def chunk_text(
     text: str,
-    chunk_size: int = 120,
-    chunk_overlap: int = 30,
+    chunk_size: int = 256,
+    chunk_overlap: int = 64,
 ) -> List[str]:
     """Word-based chunks for BM25 + dense retrieval."""
     words = text.split()
@@ -91,7 +91,7 @@ class DocumentIndex:
         self._search_engine = None
         self._rag = None
 
-    def add_file(self, filename: str, raw: bytes, chunk_size: int = 120) -> StoredDocument:
+    def add_file(self, filename: str, raw: bytes, chunk_size: int = 256) -> StoredDocument:
         from backend.config import settings
 
         text = extract_text_from_bytes(filename, raw).strip()
@@ -127,6 +127,15 @@ class DocumentIndex:
         out: List[Dict[str, Any]] = []
         for d in self.documents.values():
             out.extend(d.chunks)
+        return out
+
+    def chunks_for_document_ids(self, document_ids: List[str]) -> List[Dict[str, Any]]:
+        """All indexed chunks for the given document IDs (order: upload order, then chunk order)."""
+        out: List[Dict[str, Any]] = []
+        for did in document_ids:
+            doc = self.documents.get(did)
+            if doc:
+                out.extend(doc.chunks)
         return out
 
     def get_search_engine(self):

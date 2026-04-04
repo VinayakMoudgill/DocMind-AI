@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { Send, Zap, AlertCircle, CheckCircle, Loader } from 'lucide-react'
 
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') || 'http://127.0.0.1:8010/api'
+  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') || 'http://127.0.0.1:8000/api'
 
 interface Message {
   id: string
@@ -39,19 +40,18 @@ export function ChatInterface({
     scrollToBottom()
   }, [messages])
 
-  const handleSendMessage = async () => {
-    if (!input.trim()) return
+  const sendQuery = async (q: string, options?: { skipNli?: boolean }) => {
+    const trimmed = q.trim()
+    if (!trimmed) return
 
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
-      content: input,
+      content: trimmed,
       timestamp: new Date(),
     }
 
     setMessages((prev) => [...prev, userMessage])
-    const q = input
-    setInput('')
     setLoading(true)
 
     try {
@@ -59,10 +59,10 @@ export function ChatInterface({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message: q,
+          message: trimmed,
           conversation_id: conversationId,
           document_ids: documents.map((d) => d.id).filter(Boolean),
-          use_nli_validation: true,
+          use_nli_validation: options?.skipNli !== true,
         }),
       })
 
@@ -110,6 +110,13 @@ export function ChatInterface({
     }
   }
 
+  const handleSendMessage = async () => {
+    if (!input.trim()) return
+    const q = input
+    setInput('')
+    await sendQuery(q)
+  }
+
   return (
     <div className="card flex flex-col h-[600px] dark:bg-neutral-800">
       <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-white dark:bg-neutral-800">
@@ -131,16 +138,21 @@ export function ChatInterface({
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-sm px-4 py-3 rounded-lg ${
-                    message.role === 'user'
-                      ? 'bg-blue-600 dark:bg-blue-700 text-white rounded-br-none'
-                      : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-bl-none'
-                  }`}
+                  className={`px-4 py-3 rounded-lg ${message.role === 'user'
+                      ? 'max-w-md bg-blue-600 dark:bg-blue-700 text-white rounded-br-none'
+                      : 'max-w-2xl w-full bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-bl-none'
+                    }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  {message.role === 'assistant' ? (
+                    <div className="prose prose-sm dark:prose-invert max-w-none prose-headings:text-base prose-headings:font-semibold prose-p:my-1.5 prose-ul:my-1.5 prose-ol:my-1.5 prose-li:my-0.5 prose-pre:bg-neutral-800 prose-pre:text-neutral-100 prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:before:content-none prose-code:after:content-none">
+                      <ReactMarkdown>{message.content}</ReactMarkdown>
+                    </div>
+                  ) : (
+                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  )}
 
                   {message.role === 'assistant' && message.confidenceScore != null && (
-                    <div className="mt-3 pt-3 border-t border-neutral-300 dark:border-neutral-600 flex items-center gap-2">
+                    <div className="mt-3 pt-3 border-t border-neutral-200 dark:border-neutral-600 flex items-center gap-2">
                       {message.confidenceScore >= 0.85 ? (
                         <CheckCircle size={14} className="text-green-500" />
                       ) : message.confidenceScore >= 0.7 ? (
@@ -148,7 +160,7 @@ export function ChatInterface({
                       ) : (
                         <AlertCircle size={14} className="text-red-500" />
                       )}
-                      <span className="text-xs">
+                      <span className="text-xs text-neutral-500 dark:text-neutral-400">
                         {Math.round(message.confidenceScore * 100)}% Confident
                       </span>
                     </div>

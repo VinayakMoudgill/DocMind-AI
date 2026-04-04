@@ -20,6 +20,7 @@ aiofiles==24.1.0
 
 # RAG + ML (also used by ml-pipeline modules on PYTHONPATH)
 openai==1.58.1
+google-generativeai>=0.8.0
 numpy>=1.26.4
 sentence-transformers>=3.3.1
 transformers>=4.47.0
