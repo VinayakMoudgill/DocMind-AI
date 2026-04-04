@@ -1,0 +1,37 @@
+# Secrets — never commit (allow checked-in templates like frontend/.env.development)
+.env
+.env.local
+**/.env.local
+**/.env.development.local
+!.env.example
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+npm-debug.log*
+yarn-error.log*
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ML / caches
+.cache/
+*.pt
+*.bin
+
+# Cursor / local
+mcps/
