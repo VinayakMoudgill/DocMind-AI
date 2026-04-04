@@ -139,8 +139,8 @@ export function ChatInterface({
               >
                 <div
                   className={`px-4 py-3 rounded-lg ${message.role === 'user'
-                      ? 'max-w-md bg-blue-600 dark:bg-blue-700 text-white rounded-br-none'
-                      : 'max-w-2xl w-full bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-bl-none'
+                    ? 'max-w-md bg-blue-600 dark:bg-blue-700 text-white rounded-br-none'
+                    : 'max-w-2xl w-full bg-neutral-50 dark:bg-neutral-700 text-neutral-900 dark:text-white rounded-bl-none'
                     }`}
                 >
                   {message.role === 'assistant' ? (
@@ -149,21 +149,6 @@ export function ChatInterface({
                     </div>
                   ) : (
                     <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                  )}
-
-                  {message.role === 'assistant' && message.confidenceScore != null && (
-                    <div className="mt-3 pt-3 border-t border-neutral-200 dark:border-neutral-600 flex items-center gap-2">
-                      {message.confidenceScore >= 0.85 ? (
-                        <CheckCircle size={14} className="text-green-500" />
-                      ) : message.confidenceScore >= 0.7 ? (
-                        <AlertCircle size={14} className="text-amber-500" />
-                      ) : (
-                        <AlertCircle size={14} className="text-red-500" />
-                      )}
-                      <span className="text-xs text-neutral-500 dark:text-neutral-400">
-                        {Math.round(message.confidenceScore * 100)}% Confident
-                      </span>
-                    </div>
                   )}
                 </div>
               </div>

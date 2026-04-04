@@ -1,0 +1,109 @@
+INFO:     Will watch for changes in these directories: ['W:\\DocMind-AI']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [24632] using WatchFiles
+INFO:     Started server process [15288]
+INFO:     Waiting for application startup.
+INFO:backend.main:\U0001f680 DocMind AI Backend Starting...
+INFO:     Application startup complete.
+INFO:backend.document_index:FFmpeg path: W:\DocMind-AI\.venv\Lib\site-packages\imageio_ffmpeg\binaries\ffmpeg-win-x86_64-v7.1.exe, exists: True
+INFO:backend.document_index:Video temp file: C:\Users\asus\AppData\Local\Temp\tmpz4cvgskv.mp4, size: 24728106
+INFO:backend.document_index:Running ffmpeg command...
+INFO:backend.document_index:FFmpeg return code: 0
+INFO:backend.document_index:Audio extracted successfully to: C:\Users\asus\AppData\Local\Temp\tmp8i9xc95w.wav
+ERROR:backend.document_index:MP4 transcription error:
+Traceback (most recent call last):
+  File "W:\DocMind-AI\backend\document_index.py", line 143, in _transcribe_mp4
+    audio_data = np.frombuffer(raw_audio, dtype=np.int16).astype(np.float32) / 32768.0
+                 ^^
+NameError: name 'np' is not defined
+INFO:hybrid_search:Initializing Hybrid Search Engine...
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/README.md "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/sentence_bert_config.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 103/103 [00:00<00:00, 5131.35it/s]
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/tokenizer_config.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+INFO:httpx:HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+INFO:hybrid_search:\u2705 Hybrid Search Engine ready
+INFO:hybrid_search:Building index for 1 chunks...
+INFO:hybrid_search:Computing embeddings for 1 chunks...
+INFO:hybrid_search:\u2705 Index built: 1 chunks indexed + embeddings cached
+INFO:backend.document_index:Indexed YTDown.com_YouTube_Media_Dbki5Sj_xBA_004_360p.mp4: 1 chunks
+INFO:backend.api.documents:Stored YTDown.com_YouTube_Media_Dbki5Sj_xBA_004_360p.mp4 as 4b0f1bc3-4c7d-4c18-bd20-6c82be97304f
+INFO:     127.0.0.1:60621 - "POST /api/documents/upload HTTP/1.1" 200 OK
+INFO:backend.api.chat:Chat query: What is happening over her ?
+INFO:hybrid_search:Building index for 1 chunks...
+INFO:hybrid_search:Computing embeddings for 1 chunks...
+INFO:hybrid_search:\u2705 Index built: 1 chunks indexed + embeddings cached
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/cross-encoder/nli-deberta-v3-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/cross-encoder/nli-deberta-v3-small/fa2804872c3b4bd748f38c0185cc85775361e735/config.json "HTTP/1.1 200 OK"
+
+Loading weights:   0%|          | 0/106 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 106/106 [00:00<00:00, 4482.86it/s]
+DebertaV2ForSequenceClassification LOAD REPORT from: cross-encoder/nli-deberta-v3-small
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+deberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/cross-encoder/nli-deberta-v3-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/cross-encoder/nli-deberta-v3-small/fa2804872c3b4bd748f38c0185cc85775361e735/config.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/cross-encoder/nli-deberta-v3-small/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/cross-encoder/nli-deberta-v3-small/fa2804872c3b4bd748f38c0185cc85775361e735/tokenizer_config.json "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://huggingface.co/api/models/cross-encoder/nli-deberta-v3-small/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+INFO:httpx:HTTP Request: GET https://huggingface.co/api/models/cross-encoder/nli-deberta-v3-small/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://huggingface.co/api/models/cross-encoder/nli-deberta-v3-small "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/cross-encoder/nli-deberta-v3-small/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+INFO:httpx:HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/cross-encoder/nli-deberta-v3-small/fa2804872c3b4bd748f38c0185cc85775361e735/README.md "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://huggingface.co/api/models/cross-encoder/nli-deberta-v3-small "HTTP/1.1 200 OK"
+INFO:nli_critic_agent:NLI CrossEncoder loaded: cross-encoder/nli-deberta-v3-small on cpu
+INFO:rag_pipeline:RAG: LLM configured (OpenRouter if OPENROUTER_API_KEY, else Gemini, else OpenAI)
+INFO:rag_pipeline:\u2705 RAG Pipeline initialized
+INFO:hybrid_search:Hybrid search: query='What is happening over her ?', k=5, alpha=0.6
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|##########| 1/1 [00:00<00:00, 86.50it/s]
+INFO:hybrid_search:Dense search: Top-1 similarity = 0.0271
+INFO:hybrid_search:Sparse search: Top-1 BM25 score = -0.2747
+INFO:hybrid_search:Hybrid search returned 1 results
+INFO:rag_pipeline:RAG: Generating response for query: What is happening over her ?
+INFO:httpx:HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:rag_pipeline:LLM response length=251
+
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]
+Batches: 100%|##########| 1/1 [00:00<00:00,  5.17it/s]
+Batches: 100%|##########| 1/1 [00:00<00:00,  5.16it/s]
+INFO:rag_pipeline:RAG complete: confidence=99.54%
+INFO:     127.0.0.1:55235 - "POST /api/chat/query HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'backend\document_index.py'. Reloading...

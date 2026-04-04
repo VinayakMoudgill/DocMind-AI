@@ -237,11 +237,7 @@ class RAGPipeline:
 
         unverified = confidence_score < settings.min_confidence_threshold
         answer = generated_answer
-        if unverified and run_nli:
-            answer = (
-                f"[Hallucination Shield: entailment {confidence_score:.0%} below "
-                f"{settings.min_confidence_threshold:.0%}] {generated_answer}"
-            )
+        # Hallucination prefix removed
 
         result = {
             "answer": answer,

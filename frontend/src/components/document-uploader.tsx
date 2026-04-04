@@ -61,6 +61,10 @@ export function DocumentUploader({ onUpload }: DocumentUploaderProps) {
 
       onUpload(newDocs)
     } catch (e: any) {
+      console.error('Upload error:', e)
+      console.error('Error name:', e?.name)
+      console.error('Error message:', e?.message)
+      console.error('Error cause:', e?.cause)
       setError(e?.message || 'Upload failed')
     } finally {
       setUploading(false)

@@ -79,27 +79,7 @@ export function SourceCitation({
       </div>
 
       <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-        {confidence != null ? (
-          <>
-            <div className="flex items-center gap-2 mb-3">
-              <div
-                className={`w-2 h-2 rounded-full ${
-                  confidence >= 0.7 ? 'bg-green-500' : confidence >= 0.5 ? 'bg-amber-500' : 'bg-red-500'
-                }`}
-              />
-              <p className="text-sm font-medium text-neutral-900 dark:text-white">
-                {Math.round(confidence * 100)}% Confident
-              </p>
-            </div>
-            <p className="text-xs text-neutral-600 dark:text-neutral-400">
-              {explanation || 'NLI shield score reflects how well the answer is supported by retrieved context.'}
-            </p>
-          </>
-        ) : (
-          <p className="text-xs text-neutral-500 dark:text-neutral-400">
-            Hallucination Shield scores appear after your first grounded reply.
-          </p>
-        )}
+        {/* Confidence removed */}
       </div>
     </div>
   )

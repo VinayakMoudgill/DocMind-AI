@@ -39,7 +39,7 @@ async def upload_documents(files: List[UploadFile] = File(...)):
                 )
 
             raw = await file.read()
-            doc = document_index.add_file(file.filename, raw)
+            doc = await document_index.add_file(file.filename, raw)
             document_ids.append(doc.id)
             total_chunks += len(doc.chunks)
             logger.info("Stored %s as %s", file.filename, doc.id)
