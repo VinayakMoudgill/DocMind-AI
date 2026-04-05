@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-  @apply border-neutral-200 dark:border-neutral-800;
+  @apply border-neutral-800;
 }
 
 html {
@@ -13,55 +13,146 @@ html {
 }
 
 body {
-  @apply bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white transition-colors duration-300;
+  @apply bg-black text-neutral-100 transition-colors duration-300;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Skeleton Loader Animation */
-@keyframes skeleton-loading {
+/* Neural Network Background */
+.neural-bg {
+  background:
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(120, 219, 255, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #0f0f0f 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.neural-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px, 80px 80px;
+  animation: float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
 
   0%,
   100% {
-    opacity: 0.5;
+    transform: translateY(0px) rotate(0deg);
   }
 
-  50% {
-    opacity: 1;
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(5px) rotate(-1deg);
   }
 }
 
-.skeleton {
-  @apply animate-pulse bg-neutral-200 dark:bg-neutral-800 rounded;
-  animation: skeleton-loading 1.5s infinite;
+/* Glassmorphism Card */
+.glass-card {
+  @apply bg-black/40 backdrop-blur-xl border border-neutral-900/50 rounded-xl;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* Gradient Text */
 .gradient-text {
-  @apply bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
 }
 
-/* Card Styles */
-.card {
-  @apply rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 shadow-sm hover:shadow-md transition-shadow;
+/* Neural Glow Effect */
+.neural-glow {
+  box-shadow:
+    0 0 20px rgba(120, 119, 198, 0.5),
+    0 0 40px rgba(120, 119, 198, 0.3),
+    0 0 60px rgba(120, 119, 198, 0.1);
+}
+
+/* Sidebar Navigation */
+.sidebar-item {
+  @apply relative p-3 rounded-lg transition-all duration-300 hover:bg-white/5;
+}
+
+.sidebar-item.active {
+  @apply bg-white/10 border border-white/20;
+}
+
+.sidebar-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  @apply bg-gradient-to-b from-blue-400 to-purple-400 rounded-r;
+}
+
+/* Top Navigation */
+.nav-item {
+  @apply px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/5;
+}
+
+.nav-item.active {
+  @apply bg-white/15 border border-white/20;
+}
+
+/* Status Indicators */
+.status-dot {
+  @apply w-2 h-2 rounded-full;
+}
+
+.status-online {
+  @apply bg-green-500;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+
+.status-offline {
+  @apply bg-red-500;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.status-warning {
+  @apply bg-amber-500;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+
+/* Input Field */
+.neural-input {
+  @apply bg-black/50 border border-neutral-800/50 rounded-xl px-4 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-blue-500/30 focus:ring-2 focus:ring-blue-500/10 transition-all duration-300;
 }
 
 /* Button Styles */
-.btn-primary {
-  @apply px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors;
+.btn-neural {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105;
+  box-shadow: 0 4px 15px rgba(120, 119, 198, 0.4);
 }
 
-.btn-secondary {
-  @apply px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 font-medium transition-colors;
+.btn-neural:hover {
+  box-shadow: 0 6px 20px rgba(120, 119, 198, 0.6);
 }
 
 /* Chat Message Animations */
 .message-enter {
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeInUp 0.4s ease-out;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
 
   to {
@@ -70,22 +161,26 @@ body {
   }
 }
 
-/* Confidence Badge Colors */
-.confidence-high {
-  @apply text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20;
+/* Thread Status */
+.thread-card {
+  @apply glass-card p-4 border-l-4;
 }
 
-.confidence-medium {
-  @apply text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20;
+.thread-idle {
+  @apply border-l-neutral-600;
 }
 
-.confidence-low {
-  @apply text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20;
+.thread-queued {
+  @apply border-l-amber-600;
 }
 
-/* Source Citation Styles */
-.source-citation {
-  @apply px-3 py-2 rounded-md bg-blue-50 dark:bg-blue-900/20 border-l-2 border-blue-500 text-sm;
+.thread-processing {
+  @apply border-l-blue-600;
+}
+
+/* Drop Zone */
+.drop-zone {
+  @apply border-2 border-dashed border-neutral-800 rounded-xl p-8 text-center transition-all duration-300 hover:border-blue-500/30 hover:bg-white/5;
 }
 
 /* Responsive Grid */

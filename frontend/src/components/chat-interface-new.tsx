@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Send, Zap, AlertCircle, CheckCircle, Loader } from 'lucide-react'
+import { Send, Loader } from 'lucide-react'
 
 const API_BASE =
   process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') || 'http://127.0.0.1:8000/api'
@@ -22,7 +22,7 @@ interface ChatInterfaceProps {
   onSourcesUpdate?: (sources: any[], confidence: number, explanation: string) => void
 }
 
-export function ChatInterface({
+export function ChatInterfaceNew({
   conversationId,
   documents,
   onSourcesUpdate,
@@ -110,47 +110,56 @@ export function ChatInterface({
     }
   }
 
-  const handleSendMessage = async () => {
-    if (!input.trim()) return
-    const q = input
-    setInput('')
-    await sendQuery(q)
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      if (!input.trim() || loading) return
+      const q = input
+      setInput('')
+      sendQuery(q)
+    }
   }
 
   return (
-    <div className="card flex flex-col h-[600px] dark:bg-neutral-800">
-      <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-white dark:bg-neutral-800">
+    <div className="glass-card h-full flex flex-col">
+      {/* Messages */}
+      <div className="flex-1 overflow-auto p-4 space-y-4">
         {messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-center">
-            <Zap size={32} className="text-blue-600 dark:text-blue-400 mb-3" />
-            <h2 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-              Start a conversation
-            </h2>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs">
-              Upload documents and ask questions. Every answer is grounded in your data.
-            </p>
+          <div className="text-center py-8">
+            <p className="text-neutral-400 text-sm">Start a conversation...</p>
           </div>
         ) : (
-          <>
+          messages.map((message) => (
             <div
-              className={`inline-block max-w-[80%] p-3 rounded-xl ${message.role === 'user'
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-                  : 'bg-black/30 border border-neutral-700/50 text-neutral-100'
+              key={message.id}
+              className={`message-enter ${message.role === 'user' ? 'text-right' : 'text-left'
                 }`}
             >
-              <ReactMarkdown className="text-sm">{message.content}</ReactMarkdown>
-              {message.confidenceScore && (
-                <div className="mt-2 text-xs opacity-70">
-                  Confidence: {Math.round(message.confidenceScore * 100)}%
-                </div>
-              )}
+              <div
+                className={`inline-block max-w-[80%] p-3 rounded-xl ${message.role === 'user'
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+                  : 'bg-black/50 border border-neutral-800/50 text-neutral-100'
+                  }`}
+              >
+                <ReactMarkdown
+                  components={{
+                    p: ({ children }) => <p className="text-sm">{children}</p>
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+                {message.confidenceScore && (
+                  <div className="mt-2 text-xs opacity-70">
+                    Confidence: {Math.round(message.confidenceScore * 100)}%
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))
+          ))
         )}
         {loading && (
           <div className="text-left">
-            <div className="inline-block bg-black/30 border border-neutral-700/50 p-3 rounded-xl">
+            <div className="inline-block bg-black/50 border border-neutral-800/50 p-3 rounded-xl">
               <div className="flex items-center space-x-2">
                 <Loader size={16} className="animate-spin text-blue-400" />
                 <span className="text-sm text-neutral-400">Processing...</span>
@@ -162,7 +171,7 @@ export function ChatInterface({
       </div>
 
       {/* Input */}
-      <div className="border-t border-neutral-800/50 p-4">
+      <div className="border-t border-neutral-900/50 p-4">
         <div className="flex space-x-2">
           <div className="flex-1 relative">
             <input
@@ -174,7 +183,12 @@ export function ChatInterface({
               className="neural-input w-full pr-12"
             />
             <button
-              onClick={() => sendQuery(input)}
+              onClick={() => {
+                if (!input.trim() || loading) return
+                const q = input
+                setInput('')
+                sendQuery(q)
+              }}
               disabled={loading || !input.trim()}
               className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 disabled:opacity-50"
             >

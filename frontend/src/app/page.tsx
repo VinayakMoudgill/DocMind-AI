@@ -1,6 +1,6 @@
 import React from 'react'
-import { Dashboard } from '@/components/dashboard'
+import { DashboardNew } from '@/components/dashboard-new'
 
 export default function Home() {
-  return <Dashboard />
+  return <DashboardNew />
 }
