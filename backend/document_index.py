@@ -12,6 +12,8 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
+import numpy as np
+
 logger = logging.getLogger(__name__)
 
 
@@ -88,7 +90,6 @@ def _transcribe_mp4(raw: bytes, filename: str) -> str:
     import os
     import subprocess
     import wave
-    import numpy as np
 
     # Get ffmpeg path from imageio_ffmpeg
     import imageio_ffmpeg

@@ -59,7 +59,11 @@ export function NeuralHub({ onQuery, availableDocuments = [] }: NeuralHubProps) 
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      // Submit on Enter (without Shift)
+      e.preventDefault()
+      handleSubmit(e as any)
+    } else if (e.key === 'Enter' && e.shiftKey) {
       e.preventDefault()
       // Handle multi-line synthesis
       const textarea = e.target as HTMLTextAreaElement

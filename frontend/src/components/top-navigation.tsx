@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { User } from 'lucide-react'
+import { Brain } from 'lucide-react'
 
 interface TopNavigationProps {
   activeTab?: string
@@ -41,9 +41,9 @@ export function TopNavigation({ activeTab = 'nexus', onTabChange }: TopNavigatio
       </div>
 
       <div className="flex items-center space-x-4">
-        <button className="p-2 rounded-lg hover:bg-white/10 transition-colors duration-300">
-          <User size={20} className="text-neutral-400" />
-        </button>
+        <div className="p-2 rounded-lg bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30">
+          <Brain size={18} className="text-purple-400 animate-pulse" />
+        </div>
       </div>
     </div>
   )

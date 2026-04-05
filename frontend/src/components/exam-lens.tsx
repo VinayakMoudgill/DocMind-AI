@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Eye, Brain, FileText, GraduationCap, RefreshCw, CheckCircle, Clock, Target, BookOpen } from 'lucide-react'
+import { Eye, Brain, FileText, GraduationCap, RefreshCw, CheckCircle, Clock, Target, BookOpen, XCircle } from 'lucide-react'
 
 interface Question {
   id: string
@@ -26,7 +26,7 @@ interface ExamLensProps {
   documents?: any[]
 }
 
-export function ExamLens({ documents: uploadedDocs = [] }: { documents?: any[] }) {
+export function ExamLens({ documents: uploadedDocs = [] }: ExamLensProps) {
   const [isAnalyzing, setIsAnalyzing] = React.useState(false)
   const [selectedDocument, setSelectedDocument] = React.useState<string>('')
   const [questionType, setQuestionType] = React.useState<string>('all')
@@ -37,12 +37,6 @@ export function ExamLens({ documents: uploadedDocs = [] }: { documents?: any[] }
   const [userAnswers, setUserAnswers] = React.useState<Record<string, string>>({})
   const [showResults, setShowResults] = React.useState(false)
   const [analysisProgress, setAnalysisProgress] = React.useState(0)
-
-  // Debug: Log documents prop
-  React.useEffect(() => {
-    console.log('ExamLens - Documents prop received:', uploadedDocs)
-    console.log('ExamLens - Documents length:', uploadedDocs?.length || 0)
-  }, [uploadedDocs])
 
   // Use real uploaded documents or fallback to mock data
   const documents = uploadedDocs.length > 0 ? uploadedDocs.map((doc: any) => ({
@@ -510,7 +504,11 @@ export function ExamLens({ documents: uploadedDocs = [] }: { documents?: any[] }
                 {showResults && (
                   <div className="mt-4 p-3 bg-black/50 border border-neutral-700 rounded-lg">
                     <div className="flex items-center gap-2 mb-2">
-                      <CheckCircle size={16} className={userAnswers[question.id]?.toLowerCase().trim() === question.correctAnswer?.toLowerCase().trim() ? 'text-green-400' : 'text-red-400'} />
+                      {userAnswers[question.id]?.toLowerCase().trim() === question.correctAnswer?.toLowerCase().trim() ? (
+                        <CheckCircle size={16} className="text-green-400" />
+                      ) : (
+                        <XCircle size={16} className="text-red-400" />
+                      )}
                       <span className="text-sm font-medium text-white">
                         {userAnswers[question.id]?.toLowerCase().trim() === question.correctAnswer?.toLowerCase().trim() ? 'Correct' : 'Incorrect'}
                       </span>
